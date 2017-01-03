@@ -8,6 +8,14 @@ mongo:
     ports:
       - "27018:27017"
 
+php:
+    build: php
+    volumes:
+      - ./code:/var/www
+    links:
+      - redis
+      - mongo
+
 web:
     image: nginx:latest
     ports:
@@ -17,12 +25,4 @@ web:
       - ./site.conf:/etc/nginx/conf.d/site.conf
     links:
       - php
-      - mongo
-
-php:
-    build: php
-    volumes:
-      - ./code:/code
-    links:
-      - redis
       - mongo
