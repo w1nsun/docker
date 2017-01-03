@@ -37,5 +37,5 @@ WORKDIR /var/www
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
-ENTRYPOINT composer install --prefer-source --no-interaction
+#ENTRYPOINT composer install --no-interaction
 
