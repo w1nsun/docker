@@ -21,7 +21,7 @@ web:
     ports:
       - "8080:80"
     volumes:
-      - ./code:/code
+      - ./code:/var/www
       - ./site.conf:/etc/nginx/conf.d/site.conf
     links:
       - php

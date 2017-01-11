@@ -33,9 +33,14 @@ RUN pecl install imagick && docker-php-ext-enable imagick
 # remove unnecessary files
 RUN rm -rf /var/lib/apt/lists/*
 
-WORKDIR /var/www
-
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
+USER 1000
+WORKDIR /var/www
+
+CMD ["php-fpm"]
+
+# Open up fcgi port
+#EXPOSE 9000
 #ENTRYPOINT composer install --no-interaction
 
