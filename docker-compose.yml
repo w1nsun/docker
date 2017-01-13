@@ -28,5 +28,5 @@ nginx:
 app:
     image: php:7.1-fpm
     volumes:
-        - ./code:/var/www
+        - ./code:/var/www/html
     command: "true"
