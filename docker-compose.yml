@@ -1,28 +1,32 @@
 redis:
     image: redis:latest
     ports:
-      - "6479:6379"
+        - "6479:6379"
 
 mongo:
     image: mongo:3.2
     ports:
-      - "27018:27017"
+        - "27018:27017"
 
 php:
-    build: php
-    volumes:
-      - ./code:/var/www
+    build: ./php/
+    volumes_from:
+        - app
     links:
-      - redis
-      - mongo
+        - redis
+        - mongo
 
-web:
-    image: nginx:latest
+nginx:
+    build: ./nginx/
     ports:
-      - "8080:80"
-    volumes:
-      - ./code:/var/www
-      - ./site.conf:/etc/nginx/conf.d/site.conf
+        - "8080:80"
+    volumes_from:
+        - app
     links:
-      - php
-      - mongo
+        - php
+
+app:
+    image: php:7.1-fpm
+    volumes:
+        - ./code:/var/www
+    command: "true"
